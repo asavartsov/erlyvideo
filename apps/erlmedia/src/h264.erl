@@ -196,7 +196,8 @@ decode_nal(<<0:1, _NalRefIdc:2, ?NAL_DELIM:5, _PrimaryPicTypeId:3, _:5, _/binary
       6 -> "I, SI, P, SP";
       7 -> "I, SI, P, SP, B"
   end,
-  % ?D({"DELIM", _PrimaryPicTypeId}),
+  ?D({"DELIM", _PrimaryPicTypeId}),
+  ?D(_PrimaryPicType),
   VideoFrame = #video_frame{
    	content = video,
 		body    = nal_with_size(Delimiter),

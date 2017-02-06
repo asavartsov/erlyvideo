@@ -24,9 +24,12 @@
 -module(apps_streaming).
 -author('Max Lapshin <max@maxidoors.ru>').
 -include("../log.hrl").
--include_lib("rtmp/include/rtmp.hrl").
--include_lib("erlmedia/include/video_frame.hrl").
--include_lib("erlmedia/include/media_info.hrl").
+-include("../../../rtmp/include/rtmp.hrl").
+%%% -include_lib("../rtmp/include/rtmp.hrl").
+-include("../../../erlmedia/include/video_frame.hrl").
+%% -include_lib("erlmedia/include/video_frame.hrl").
+-include("../../../erlmedia/include/media_info.hrl").
+%% -include_lib("erlmedia/include/media_info.hrl").
 
 -export([play/2, pause/2, pauseRaw/2, stop/2, seek/2,
          getStreamLength/2, checkBandwidth/2, 'FCSubscribe'/2, 'DVRGetStreamInfo'/2]).

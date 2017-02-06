@@ -35,10 +35,10 @@
 -author('Max Lapshin <max@maxidoors.ru>').
 
 -include("log.hrl").
--include_lib("erlmedia/include/video_frame.hrl").
--include_lib("erlmedia/include/media_info.hrl").
--include_lib("erlmedia/include/sdp.hrl").
--include_lib("rtp/include/rtp.hrl").
+-include_lib("../../erlmedia/include/video_frame.hrl").
+-include_lib("../../erlmedia/include/media_info.hrl").
+-include_lib("../../erlmedia/include/sdp.hrl").
+-include_lib("../../rtp/include/rtp.hrl").
 -include("rtsp.hrl").
 
 -export([encode_frame/2, handle_describe_request/4, handle_play_setup/4, handle_play_request/4]).

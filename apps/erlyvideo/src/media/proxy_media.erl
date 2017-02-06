@@ -25,7 +25,7 @@
 -behaviour(ems_media).
 -include("ems_media.hrl").
 -include("../log.hrl").
--include_lib("erlmedia/include/video_frame.hrl").
+-include_lib("../../../erlmedia/include/video_frame.hrl").
 
 -export([init/2, handle_frame/2, handle_control/2, handle_info/2]).
 

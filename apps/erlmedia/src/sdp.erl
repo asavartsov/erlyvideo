@@ -294,9 +294,9 @@ encode(Session, MediaSeq) ->
 
 -spec make_session() -> string().
 make_session() ->
-  random:seed(now()),
+  rand:seed(erlang:timestamp()),
   M = 100000000000000,
-  integer_to_list(M+random:uniform(M)*5).
+  integer_to_list(M+rand:uniform(M)*5).
 
 -spec make_username() -> string().
 make_username() ->

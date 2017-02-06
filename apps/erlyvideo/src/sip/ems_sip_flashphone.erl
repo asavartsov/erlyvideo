@@ -25,9 +25,9 @@
 -author('Max Lapshin <max@maxidoors.ru>').
 -author('Maxim Treskin <zerthurd@gmail.com>').
 -include("../log.hrl").
--include_lib("erlmedia/include/video_frame.hrl").
--include_lib("erlmedia/include/media_info.hrl").
--include_lib("erlmedia/include/sdp.hrl").
+-include_lib("../../../erlmedia/include/video_frame.hrl").
+-include_lib("../../../erlmedia/include/media_info.hrl").
+-include_lib("../../../erlmedia/include/sdp.hrl").
 
 -behaviour(gen_fsm).
 

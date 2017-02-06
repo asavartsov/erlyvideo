@@ -23,7 +23,7 @@
 %%%---------------------------------------------------------------------------------------
 -module(rtsp_tests).
 -author('Max Lapshin <max@maxidoors.ru>').
--include_lib("erlmedia/include/video_frame.hrl").
+-include_lib("../../../apps/erlmedia/include/video_frame.hrl").
 -include_lib("eunit/include/eunit.hrl").
 -compile(export_all).
 

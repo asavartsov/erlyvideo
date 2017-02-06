@@ -23,8 +23,8 @@
 -module(http_flv_media).
 -author('Max Lapshin <max@maxidoors.ru>').
 -behaviour(ems_media).
--include_lib("erlmedia/include/video_frame.hrl").
--include_lib("erlmedia/include/media_info.hrl").
+-include_lib("../../../erlmedia/include/video_frame.hrl").
+-include_lib("../../../erlmedia/include/media_info.hrl").
 -include("ems_media.hrl").
 -include("../log.hrl").
 

@@ -25,8 +25,8 @@
 
 -include_lib("eunit/include/eunit.hrl").
 -include("../media/ems_media.hrl").
--include_lib("erlmedia/include/video_frame.hrl").
--include_lib("erlmedia/include/media_info.hrl").
+-include_lib("../../../erlmedia/include/video_frame.hrl").
+-include_lib("../../../erlmedia/include/media_info.hrl").
 
 -export([read_flow/1]).
 

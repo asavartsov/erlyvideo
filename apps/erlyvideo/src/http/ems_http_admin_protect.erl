@@ -20,19 +20,24 @@
 %%% along with erlyvideo.  If not, see <http://www.gnu.org/licenses/>.
 %%%
 %%%---------------------------------------------------------------------------------------
--module(ems_http_admin_protect, [Login, Password]).
+% -module(ems_http_admin_protect, [Login, Password]).
+-module(ems_http_admin_protect).
 -author('Max Lapshin <max@maxidoors.ru>').
 
 
--export([http/4]).
+-export([http/4, http_auth/3]).
 
 
 http(_Host, _Method, _Path, Req) ->
   Headers = Req:get(headers),
-  case http_auth(Headers) of
+  case http_auth(Headers) of 
     true -> unhandled;
     false -> Req:respond(401,[{'WWW-Authenticate', "Basic realm=Erlyvideo admin panel"}],"Please login in system")
   end.
 
 http_auth(Headers) ->
+    proplists:get_value('Authorization', Headers) == "Basic"++base64:encode_to_string("admin:admin").
+
+
+http_auth(Headers, Login, Password) ->
   proplists:get_value('Authorization',Headers) == "Basic "++base64:encode_to_string(Login ++ ":" ++ Password).

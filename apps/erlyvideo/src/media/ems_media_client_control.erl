@@ -23,8 +23,8 @@
 -module(ems_media_client_control).
 -author('Max Lapshin <max@maxidoors.ru>').
 
--include_lib("erlmedia/include/video_frame.hrl").
--include_lib("erlmedia/include/media_info.hrl").
+-include_lib("../../../erlmedia/include/video_frame.hrl").
+-include_lib("../../../erlmedia/include/media_info.hrl").
 -include("ems_media.hrl").
 -include("ems_media_client.hrl").
 -include("../log.hrl").
@@ -241,7 +241,6 @@ default_seek_reply(Client, {ok, NewDTS}, #ems_media{clients = Clients} = Media) 
     _ -> ok
   end,
   {reply, {seek_success, NewDTS}, Media, ?TIMEOUT};
-
 default_seek_reply(Client, {DTS, _NewPos, NewDTS}, #ems_media{clients = Clients} = Media) ->
   case ems_media_clients:find(Clients, Client) of
     #client{ticker = Ticker, state = passive} ->
