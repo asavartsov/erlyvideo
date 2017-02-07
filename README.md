@@ -1,7 +1,7 @@
 Erlyvideo and Background Information
 =========
 
-This was originally an open source project but it went closed source and can be licensed here: [Flussonic](https://flussonic.com). Since I am working on a scientific project that will utilize streaming video, I want an open source version. Hence I a hacking around with this one as well as exploring other alternatives. Otherwise, for others,  the simplest thing is simply to pay for a Flussonic license. I have no idea what the relationship of this code base is to the current commercial version.  
+This was originally an open source project but it went closed source and can be licensed here: [Flussonic](https://flussonic.com). Since I am working on a scientific project that will utilize video streaming, I wanted an open source version. Hence I started hacking around with this for video streaming as well as exploring other alternatives. Otherwise, for others,  the simplest thing is simply to pay for a Flussonic license. I have no idea what the relationship of this code base is to the current commercial version.  
 
 I left some of the verbage in this README file alone for now, although it may not be fully relevant. This code base was cloned from a another remnant of the open source version but, as is, it did not compile due to bit-rot. For now I am hacking around on this to get it to compile and work as part of the different alternatives I am exploring for my project.
 
