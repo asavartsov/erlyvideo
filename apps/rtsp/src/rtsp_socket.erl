@@ -37,9 +37,9 @@
 -behaviour(gen_server).
 
 -include("log.hrl").
--include_lib("erlmedia/include/video_frame.hrl").
--include_lib("erlmedia/include/media_info.hrl").
--include_lib("erlmedia/include/sdp.hrl").
+-include_lib("../../erlmedia/include/video_frame.hrl").
+-include_lib("../../erlmedia/include/media_info.hrl").
+-include_lib("../../erlmedia/include/sdp.hrl").
 -include("rtsp.hrl").
 
 -export([start_link/1, set_socket/2]).
@@ -333,7 +333,7 @@ save_media_info(#rtsp_socket{} = Socket, #media_info{audio = Audio, video = Vide
 
 
 generate_session() ->
-  {_A1, A2, A3} = now(),
+  {_A1, A2, A3} = erlang:monotonic_time(),
   lists:flatten(io_lib:format("~p~p", [A2*1000,A3 div 1000])).
 
 

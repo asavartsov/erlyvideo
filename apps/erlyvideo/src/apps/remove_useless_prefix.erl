@@ -24,7 +24,7 @@
 -module(remove_useless_prefix).
 -author('Max Lapshin <max@maxidoors.ru>').
 -include("../log.hrl").
--include_lib("rtmp/include/rtmp.hrl").
+-include_lib("../../../rtmp/include/rtmp.hrl").
 
 -export([play/2, getStreamLength/2]).
 

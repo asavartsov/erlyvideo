@@ -21,9 +21,12 @@
 %%% along with erlyvideo.  If not, see <http://www.gnu.org/licenses/>.
 %%%
 %%%---------------------------------------------------------------------------------------
+
+-include_lib("../../pmod_transform/include/pmod.hrl").
+
 -module(apps_rewrite_publish, [URL]).
 -author('Max Lapshin <max@maxidoors.ru>').
--include_lib("rtmp/include/rtmp.hrl").
+-include_lib("../../../rtmp/include/rtmp.hrl").
 
 
 -export([publish/2]).

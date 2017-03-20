@@ -23,14 +23,14 @@
 -module(mpegts_reader).
 -author('Max Lapshin <max@maxidoors.ru>').
 
--include_lib("erlmedia/include/h264.hrl").
--include_lib("erlmedia/include/aac.hrl").
+-include_lib("../../erlmedia/include/h264.hrl").
+-include_lib("../../erlmedia/include/aac.hrl").
 -include("log.hrl").
 -include("../include/mpegts.hrl").
 -include("../include/mpegts_psi.hrl").
 % -include("mpegts_reader.hrl").
 
--include_lib("erlmedia/include/video_frame.hrl").
+-include_lib("../../erlmedia/include/video_frame.hrl").
 -include_lib("kernel/include/file.hrl").
 
 -define(MAX_PAYLOAD, 16#100000000).
@@ -901,20 +901,20 @@ extract_real_nal_test() ->
 
 extract_nal_erl_bm(N) ->
   Bin = nal_test_bin(large),
-  T1 = erlang:now(),
+  T1 = erlang:monotonic_time(),
   lists:foreach(fun(_) ->
     extract_nal_erl(Bin)
   end, lists:seq(1,N)),
-  T2 = erlang:now(),
+  T2 = erlang:monotonic_time(),
   ?D({"Timer erl", timer:now_diff(T2, T1) / N}).
 
 extract_nal_c_bm(N) ->
   Bin = nal_test_bin(large),
-  T1 = erlang:now(),
+  T1 = erlang:monotonic_time(),
   lists:foreach(fun(_) ->
     extract_nal(Bin)
   end, lists:seq(1,N)),
-  T2 = erlang:now(),
+  T2 = erlang:monotonic_time(),
   ?D({"Timer native", timer:now_diff(T2, T1) / N}).
 
 

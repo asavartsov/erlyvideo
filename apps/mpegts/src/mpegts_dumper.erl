@@ -74,7 +74,7 @@ dump_avc(Body, Acc) ->
 %   {ok, Count};
 
 dump_frames(File, Reader, Count) ->
-  put(start_time, erlang:now()),
+  put(start_time, erlang:monotonic_time()),
   dump_frames(File, 0, Reader, Count).
 
 dump_frames(File, Position, Reader, Count) ->
@@ -82,7 +82,7 @@ dump_frames(File, Position, Reader, Count) ->
   if
     Count rem 1000 == 0 andalso Count > 0 andalso Count =/= PrevIOCount -> 
       put(prev_io_count, Count),
-      DeltaTime = timer:now_diff(erlang:now(), get(start_time)) div 1000,
+      DeltaTime = timer:now_diff(erlang:monotonic_time(), get(start_time)) div 1000,
       ?D({Count, DeltaTime, Count / DeltaTime, Position div (DeltaTime*1000)});
     true -> ok
   end,

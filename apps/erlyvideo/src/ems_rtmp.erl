@@ -25,9 +25,9 @@
 -author('Max Lapshin <max@maxidoors.ru>').
 
 
--include_lib("erlmedia/include/video_frame.hrl").
--include_lib("erlmedia/include/media_info.hrl").
--include_lib("rtmp/include/rtmp.hrl").
+-include_lib("../../erlmedia/include/video_frame.hrl").
+-include_lib("../../erlmedia/include/media_info.hrl").
+-include_lib("../../rtmp/include/rtmp.hrl").
 -include("log.hrl").
 
 
@@ -202,7 +202,7 @@ metadata_frame(#media_info{options = Options, duration = Duration} = Media, Opts
                       ({K,V}) when is_tuple(V) -> {K, iolist_to_binary(io_lib:format("~p", [V]))};
                       (Else) -> Else end, Options),
   Meta1 = lists:ukeymerge(1, lists:keysort(1,Meta), video_parameters(Media)),
-  DurationMeta = case Duration of
+   DurationMeta = case Duration of
     undefined -> [];
     _ -> [{duration, Duration / 1000}]
   end,

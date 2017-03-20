@@ -2,7 +2,7 @@
 % Code inlining is in elixir_inliner, general helpers in elixir_tree_helpers.
 -module(elixir_transform).
 -export([parse/3]).
--include("elixir.hrl").
+-include("../../elixir/include/elixir.hrl").
 
 parse(String, Line, #elixir_scope{filename=Filename} = S) ->
   Forms = forms(String, Line, Filename),
@@ -54,7 +54,7 @@ var_merger(_Var, K1, K2) ->
 
 % Transform considering assigns manipulation.
 transform_assigns(Fun, Args, Scope) ->
-  _Merger = fun(_,_,F) -> F end,
+%  _Merger = fun(_,_,F) -> F end,
   { Result, NewScope } = Fun(Args, Scope#elixir_scope{assign=true}),
   { Result, NewScope#elixir_scope{assign=false, temp_vars=[] } }.
 

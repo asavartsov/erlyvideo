@@ -10,14 +10,14 @@
 %%%---------------------------------------------------------------------------------------
 -module(ems_http_deskshare).
 -author('Max Lapshin <max@maxidoors.ru>').
--include_lib("erlmedia/include/video_frame.hrl").
+-include_lib("../../../erlmedia/include/video_frame.hrl").
 -include("../log.hrl").
 
 
 -include_lib("eunit/include/eunit.hrl").
 
 -define(CAPTURE_START, 0).
--define(CAPTURE_UPDATE, 1).
+-define(CAPTURE_UPDATE, 1). 
 -define(CAPTURE_END, 2).
 -define(MOUSE_LOCATION_EVENT, 3).
 

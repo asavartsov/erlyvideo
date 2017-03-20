@@ -67,14 +67,14 @@ dhKey(<<_:768/binary, P1, P2, P3, P4, _/binary>> = C1, version2) ->
 rc4_key(Key, Data) ->
   <<Out:16/binary, _/binary>> = hmac256:digest_bin(Key, Data),
   % Out = hmac256:digest_bin(Key, Data),
-  crypto:rc4_set_key(Out).
+  crypto:stream_init(rc4, Out).
 
 crypt(Key, Data) ->
-  crypto:rc4_encrypt_with_state(Key, Data).
+  crypto:stream_encrypt(Key, Data).
 
 
 prepare_keys(KeyIn1, KeyOut1) ->
-  D1 = crypto:rand_bytes(?HS_BODY_LEN),
+  D1 = crypto:strong_rand_bytes(?HS_BODY_LEN),
   {KeyIn, D2} = crypt(KeyIn1, D1),
   {KeyOut, _} = crypt(KeyOut1, D2),
   {KeyIn, KeyOut}.
@@ -89,14 +89,14 @@ crypto_keys(ServerPublic, ClientPublic, SharedSecret) ->
 generate_dh(ClientPublic) ->
   P = <<(size(?DH_P)):32, ?DH_P/binary>>,
   G = <<(size(?DH_G)):32, ?DH_G/binary>>,
-  {<<?DH_KEY_SIZE:32, ServerPublic:?DH_KEY_SIZE/binary>>, Private} = crypto:dh_generate_key([P, G]),
-  SharedSecret = crypto:dh_compute_key(<<(size(ClientPublic)):32, ClientPublic/binary>>, Private, [P, G]),
+  {<<?DH_KEY_SIZE:32, ServerPublic:?DH_KEY_SIZE/binary>>, Private} = crypto:generate_key(dh,[P,G]),
+  SharedSecret = crypto:compute_key(dh, <<(size(ClientPublic)):32, ClientPublic/binary>>, Private, [P, G]),
 	{ServerPublic, SharedSecret}.
 
 
 
 s2(C2, ?HS_CRYPTED) ->
-  Response1 = <<0:32, 3,0,2,1, (crypto:rand_bytes(?HS_BODY_LEN - 8))/binary>>, 
+  Response1 = <<0:32, 3,0,2,1, (crypto:strong_rand_bytes(?HS_BODY_LEN - 8))/binary>>, 
   SchemeVersion = rtmp_handshake:client_scheme_version(C2),
 
   {_, ClientPublic, _} = dhKey(C2, SchemeVersion),
