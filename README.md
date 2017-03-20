@@ -7,10 +7,15 @@ I left some of the verbage in this README file alone for now, although it may no
 
 Gradually I am able to compile more and more it. Once everything compiles I will see how well it actually works.
 
-* Notes (as of 3/20/2017): The application now compiles after a number of small changes to deal with "bit rot." It compiles on Unbuntu 14.04 with erlang 19.0. The main issues were the following:
-** include files not pointing to the right directories
-** obsolete or depreciated functions
-** paramaterized modules that are no longer supported in erlang. 
+Changes
+========
+*Notes (as of 3/20/2017):* The application now compiles after a number of small changes to deal with "bit rot." It compiles on Unbuntu 14.04 with erlang 19.0. The next step is to get it working! 
+
+The main issues were the following:
+1. include files not pointing to the right directories
+2. obsolete or depreciated functions
+3. paramaterized modules that are no longer supported in erlang.
+4. there also were some issues with compiling the bifs that required changing the rebar.config files
 
 Licensing (still relevant)
 =========
