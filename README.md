@@ -5,7 +5,12 @@ This was originally an open source project but it went closed source and can be 
 
 I left some of the verbage in this README file alone for now, although it may not be fully relevant. This code base was cloned from a another remnant of the open source version but, as is, it did not compile due to bit-rot. For now I am hacking around on this to get it to compile and work as part of the different alternatives I am exploring for my project.
 
-Gradually I am able to compile more and more it. Once everything compiles I will see how well it actually works. 
+Gradually I am able to compile more and more it. Once everything compiles I will see how well it actually works.
+
+* Notes (as of 3/20/2017): The application now compiles after a number of small changes to deal with "bit rot." It compiles on Unbuntu 14.04 with erlang 19.0. The main issues were the following:
+** include files not pointing to the right directories
+** obsolete or depreciated functions
+** paramaterized modules that are no longer supported in erlang. 
 
 Licensing (still relevant)
 =========
