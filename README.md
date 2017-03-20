@@ -14,7 +14,7 @@ Changes
 The main issues were the following:
 1. include files not pointing to the right directories
 2. obsolete or depreciated functions
-3. paramaterized modules that are no longer supported in erlang.
+3. parameterized modules that are no longer supported in erlang.
 4. there also were some issues with compiling the bifs that required changing the rebar.config files
 
 Licensing (still relevant)
