@@ -5,7 +5,7 @@
 -include("../../elixir/include/elixir.hrl").
 
 
--define(D(X), error_logger:error_msg("~p", [X])).
+-define(D(X), error_logger:error_msg("~n~p~n", [X])).
 
 -export([start_link/0]).
 -export([add_path/1, remove_path/1, paths/0]).
@@ -188,34 +188,51 @@ proxy_module_text(Module) ->
 
 
 reload_if_required_paths(PathsToCheck) ->
+  % io:format("~n~n PathsToCheck = ~p~n", [PathsToCheck]),
   [reload_module_if_required(Path) || Path <- PathsToCheck].
+
+compile_time_info_available(Module) ->
+   Options = Module:module_info(compile),
+   Time = proplists:get_value(time, Options),
+    case Time of
+      undefined ->
+            ReturnValue = {false, undefined};
+      {Y, Mon, D, H, Min, S} -> 
+           ReturnValue = {true, {Y, Mon, D, H, Min, S}}
+    end,
+   ReturnValue.
 
 
 reload_module_if_required(Path) ->
   {ok, #file_info{mtime = Mtime}} = ems_file:read_file_info(Path),
   Module = mod_name(Path),
   ExMod = ex_name(Module),
-  %% io:format("Path = ~n~p~n", Path),
-  case erlang:module_loaded(ExMod) of
-    true ->
-      Options = ExMod:module_info(compile),
-     %%  io:format ("Options = ~n~p~n", Options),
-      {Y,Mon,D,H,Min,S} = proplists:get_value(time, Options),
-      LocalCompileTime = calendar:universal_time_to_local_time({{Y,Mon,D},{H,Min,S}}),
-      LifeTime = calendar:datetime_to_gregorian_seconds(LocalCompileTime) - calendar:datetime_to_gregorian_seconds(Mtime),
-      if
-        LifeTime < 0 ->
-          % io:format("Reloading ~p~n", [Path]),
-          code:soft_purge(ExMod),
-          code:delete(ExMod),
-          compile_new_module(Path),
-          ok;
-        true -> 
-          ok
-      end;
-    false ->
-      compile_new_module(Path)
-  end,
+  % io:format("~n~n {Module, ExMod, Path, module_info} = ~p~n~n", [{Module, ExMod, Path, Module:module_info(attributes)}]),
+case compile_time_info_available(ExMod)  of
+  {true, Time} -> 
+    case erlang:module_loaded(ExMod) of
+     true ->
+       % Options = ExMod:module_info(compile),
+       % io:format ("~n~n~n Options =  ~p~n~n", [Options]),
+       {Y,Mon,D,H,Min,S} = Time,    % proplists:get_value(time, Options),
+       LocalCompileTime = calendar:universal_time_to_local_time({{Y,Mon,D},{H,Min,S}}),
+       LifeTime = calendar:datetime_to_gregorian_seconds(LocalCompileTime) - calendar:datetime_to_gregorian_seconds(Mtime),
+       if
+         LifeTime < 0 ->
+           % io:format("Reloading ~p~n", [Path]),
+           code:soft_purge(ExMod),
+           code:delete(ExMod),
+           compile_new_module(Path),
+           ok;
+         true -> 
+           ok
+       end;
+     false ->
+       compile_new_module(Path)
+   end;
+ {false, _} ->
+      ok %  ?D("Module has no time info")
+end,
   Module.
 
 mod_name(Path) when is_list(Path) ->
