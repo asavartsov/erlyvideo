@@ -12,19 +12,17 @@ sign(Timestamp, Name, Host) ->
   
 
 check_sign(Name, Timestamp, Hash, Host) ->
-  {MegaSecs, Secs, _MicroSecs} = erlang:monotonic_time(),
+  {MegaSecs, Secs, _MicroSecs} = erlang:timestamp(),
   case MegaSecs*1000000 + Secs < list_to_integer(Timestamp) of
     true ->
       sign(Timestamp, Name, Host) == list_to_binary(Hash);
     false ->
       false
   end.
-  
-
 http(Host, 'GET', ["iphone.html"], Req) ->
   erlydtl:compile(code:lib_dir(auth_iphone, priv) ++ "/iphone.html", iphone_template),
   URL = "video.mp4.m3u8",
-  {MegaSecs, Secs, _MicroSecs} = erlang:monotonic_time(),
+  {MegaSecs, Secs, _MicroSecs} = erlang:timestamp(),
   Timestamp = integer_to_list(MegaSecs*1000000 + Secs + ?TIMEOUT),
   Hash = binary_to_list(auth_iphone:sign(Timestamp, URL, Host)),
   SignedURL = string:join([Timestamp, Hash, URL], "/"),
@@ -46,7 +44,7 @@ http(Host, 'GET', ["iphone", "playlists", TimestampS, Hash | StreamName] = Path,
       {ok, Re} = re:compile("^(.+).m3u8$"),
       {match, [_, Name]} = re:run(FullName, Re, [{capture, all, binary}]),
 
-      {MegaSecs, Secs, _MicroSecs} = erlang:monotonic_time(),
+      {MegaSecs, Secs, _MicroSecs} = erlang:timestamp(),
       Timestamp = integer_to_list(MegaSecs*1000000 + Secs + ?TIMEOUT),
       Hash1 = binary_to_list(auth_iphone:sign(Timestamp, binary_to_list(Name), Host)),
 

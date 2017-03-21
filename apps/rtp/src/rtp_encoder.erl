@@ -76,7 +76,7 @@ encode(#video_frame{dts = DTS, body = Data} = _F, #rtp_channel{} = RTP) ->
 encode_rtcp(#rtp_channel{stream_id = StreamId, packet_count = PacketCount, octet_count = OctetCount, timecode = Timecode}, sender_report, _) ->
   Count = 0,
   Length = 6, % StreamId, 2*NTP, Timecode, Packet, Octet words
-  {Mega, Sec, Micro} = erlang:monotonic_time(),
+  {Mega, Sec, Micro} = erlang:timestamp(),
   MSW = (Mega*1000000 + Sec + ?YEARS_70) band 16#FFFFFFFF,
   LSW = Micro * 1000,
   % NTP = MSW + Micro / 1000000,

@@ -333,7 +333,7 @@ save_media_info(#rtsp_socket{} = Socket, #media_info{audio = Audio, video = Vide
 
 
 generate_session() ->
-  {_A1, A2, A3} = erlang:monotonic_time(),
+  {_A1, A2, A3} = erlang:timestamp(),
   lists:flatten(io_lib:format("~p~p", [A2*1000,A3 div 1000])).
 
 

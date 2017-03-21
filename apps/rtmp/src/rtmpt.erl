@@ -158,7 +158,7 @@ init([SessionId, IP]) ->
   process_flag(trap_exit, true),
   (catch ems_network_lag_monitor:watch(self())),
   timer:send_interval(?RTMPT_TIMEOUT, check_client),
-  {ok, #rtmpt{session_id = SessionId, ip = IP, last_visit_at = erlang:monotonic_time()}}.
+  {ok, #rtmpt{session_id = SessionId, ip = IP, last_visit_at = erlang:timestamp()}}.
         
 
 %%-------------------------------------------------------------------------
@@ -181,7 +181,7 @@ handle_call({server_data, Bin}, _From, #rtmpt{buffer = Buffer, bytes_count = Byt
 
 handle_call({client_data, Bin}, _From, #rtmpt{consumer = Upstream} = State) when is_pid(Upstream)  ->
   Upstream ! {rtmpt, self(), Bin},
-  {reply, ok, State#rtmpt{last_visit_at = erlang:monotonic_time()}};
+  {reply, ok, State#rtmpt{last_visit_at = erlang:timestamp()}};
 
 handle_call({set_consumer, Upstream}, _From, #rtmpt{consumer = undefined} = State) ->
   erlang:monitor(process, Upstream),
@@ -199,7 +199,7 @@ handle_call(info, _From, #rtmpt{sequence_number = SequenceNumber, session_id = S
 
 handle_call({recv, SequenceNumber}, _From, #rtmpt{buffer = Buffer, consumer = Consumer} = State) ->
   Consumer ! {rtmpt, self(), alive},
-  {reply, {ok, Buffer}, State#rtmpt{buffer = <<>>, sequence_number = SequenceNumber, last_visit_at = erlang:monotonic_time()}}.
+  {reply, {ok, Buffer}, State#rtmpt{buffer = <<>>, sequence_number = SequenceNumber, last_visit_at = erlang:timestamp()}}.
 
 
 
@@ -229,7 +229,7 @@ handle_cast(_Msg, State) ->
 %% @private
 %%-------------------------------------------------------------------------
 handle_info(check_client, #rtmpt{last_visit_at = LastVisitAt} = State) ->
-  case timer:now_diff(erlang:monotonic_time(), LastVisitAt) div 1000 of
+  case timer:now_diff(erlang:timestamp(), LastVisitAt) div 1000 of
     N when N > ?RTMPT_TIMEOUT -> self() ! timeout;
     _ -> ok
   end,

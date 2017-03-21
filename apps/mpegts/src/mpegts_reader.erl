@@ -901,20 +901,20 @@ extract_real_nal_test() ->
 
 extract_nal_erl_bm(N) ->
   Bin = nal_test_bin(large),
-  T1 = erlang:monotonic_time(),
+  T1 = erlang:timestamp(),
   lists:foreach(fun(_) ->
     extract_nal_erl(Bin)
   end, lists:seq(1,N)),
-  T2 = erlang:monotonic_time(),
+  T2 = erlang:timestamp(),
   ?D({"Timer erl", timer:now_diff(T2, T1) / N}).
 
 extract_nal_c_bm(N) ->
   Bin = nal_test_bin(large),
-  T1 = erlang:monotonic_time(),
+  T1 = erlang:timestamp(),
   lists:foreach(fun(_) ->
     extract_nal(Bin)
   end, lists:seq(1,N)),
-  T2 = erlang:monotonic_time(),
+  T2 = erlang:timestamp(),
   ?D({"Timer native", timer:now_diff(T2, T1) / N}).
 
 

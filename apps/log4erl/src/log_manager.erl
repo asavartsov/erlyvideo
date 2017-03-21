@@ -70,7 +70,7 @@ change_format(Logger, Appender, Format) ->
 %%--------------------------------------------------------------------
 log(Logger, Level, Log, Data) ->
     T = calendar:local_time(),
-    {_, _, Ms} = erlang:monotonic_time(),
+    {_, _, Ms} = erlang:timestamp(),
     ?LOG2("Logging:~n ~p ~p ~p ~p~n",[Logger, Level, Log, Data]),
     LL = #log{level=Level, msg=Log, data=Data, time=T, millis = Ms},
     notify_logger(Logger, {log, LL}).

@@ -2,7 +2,7 @@
 -author('Max Lapshin <max@maxidoors.ru>').
 -behaviour(gen_server).
 -include_lib("kernel/include/file.hrl").
--include("elixir.hrl").
+-include("../../elixir/include/elixir.hrl").
 
 
 -define(D(X), error_logger:error_msg("~p", [X])).
@@ -195,9 +195,11 @@ reload_module_if_required(Path) ->
   {ok, #file_info{mtime = Mtime}} = ems_file:read_file_info(Path),
   Module = mod_name(Path),
   ExMod = ex_name(Module),
+  %% io:format("Path = ~n~p~n", Path),
   case erlang:module_loaded(ExMod) of
     true ->
       Options = ExMod:module_info(compile),
+     %%  io:format ("Options = ~n~p~n", Options),
       {Y,Mon,D,H,Min,S} = proplists:get_value(time, Options),
       LocalCompileTime = calendar:universal_time_to_local_time({{Y,Mon,D},{H,Min,S}}),
       LifeTime = calendar:datetime_to_gregorian_seconds(LocalCompileTime) - calendar:datetime_to_gregorian_seconds(Mtime),
