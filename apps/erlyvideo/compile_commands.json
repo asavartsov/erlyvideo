@@ -1,10 +1,6 @@
 [
 { "file"      : "c_src/mmap.c"
-, "directory" : "/home/yitzchok/Downloads/erlyvideo/apps/erlyvideo"
+, "directory" : "/home/yitzchok/projects/erlyvideo/apps/erlyvideo"
 , "command"   : "cc -c -g -Wall -fPIC -MMD -I\"/home/yitzchok/19.0/lib/erl_interface-3.9/include\" -I\"/home/yitzchok/19.0/erts-8.0/include\" c_src/mmap.c -o c_src/mmap.o"
-},
-{ "file"      : "c_src/mp4mux.c"
-, "directory" : "/home/yitzchok/Downloads/erlyvideo/apps/erlyvideo"
-, "command"   : "cc -c -g -Wall -fPIC -MMD -I\"/home/yitzchok/19.0/lib/erl_interface-3.9/include\" -I\"/home/yitzchok/19.0/erts-8.0/include\" c_src/mp4mux.c -o c_src/mp4mux.o"
 }
 ]

@@ -187,7 +187,7 @@ fix_undefined_dts(Frame, Media) ->
 calculate_new_stream_shift(#video_frame{dts = DTS} = Frame, #ems_media{ts_delta = undefined, source_lost_at = LostAt, last_dts = LDTS} = Media) ->
   GlueDelta = case LostAt of
     undefined -> 0;
-    _ -> timer:now_diff(erlang:now(), LostAt) div 1000
+    _ -> timer:now_diff(erlang:timestamp(), LostAt) div 1000
   end,
   {LastDTS, TSDelta} = case LDTS of
     undefined -> {DTS, 0};

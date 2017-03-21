@@ -1,10 +1,10 @@
 [
-{ "file"      : "c_src/mpeg2_crc32.c"
-, "directory" : "/home/yitzchok/Downloads/erlyvideo/apps/mpegts"
-, "command"   : "cc -c -g -Wall -fPIC -MMD -I\"/home/yitzchok/19.0/lib/erl_interface-3.9/include\" -I\"/home/yitzchok/19.0/erts-8.0/include\" c_src/mpeg2_crc32.c -o c_src/mpeg2_crc32.o"
-},
 { "file"      : "c_src/mpegts_reader.c"
-, "directory" : "/home/yitzchok/Downloads/erlyvideo/apps/mpegts"
+, "directory" : "/home/yitzchok/projects/erlyvideo/apps/mpegts"
 , "command"   : "cc -c -g -Wall -fPIC -MMD -I\"/home/yitzchok/19.0/lib/erl_interface-3.9/include\" -I\"/home/yitzchok/19.0/erts-8.0/include\" c_src/mpegts_reader.c -o c_src/mpegts_reader.o"
+}
+{ "file"      : "c_src/mpeg2_crc32.c"
+, "directory" : "/home/yitzchok/projects/erlyvideo/apps/mpegts"
+, "command"   : "cc -c -g -Wall -fPIC -MMD -I\"/home/yitzchok/19.0/lib/erl_interface-3.9/include\" -I\"/home/yitzchok/19.0/erts-8.0/include\" c_src/mpeg2_crc32.c -o c_src/mpeg2_crc32.o"
 }
 ]
