@@ -24,8 +24,8 @@
 -module(mpegts_encode_tests).
 -author('Max Lapshin <max@maxidoors.ru>').
 -include_lib("eunit/include/eunit.hrl").
--include_lib("erlmedia/include/video_frame.hrl").
--include_lib("erlmedia/include/media_info.hrl").
+-include_lib("../../../erlmedia/include/video_frame.hrl").
+-include_lib("../../../erlmedia/include/media_info.hrl").
 -include("../../src/log.hrl").
 
 -compile(export_all).

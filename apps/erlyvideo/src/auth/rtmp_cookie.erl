@@ -24,7 +24,7 @@
 -module(rtmp_cookie).
 -author('Max Lapshin <max@maxidoors.ru>').
 -include("../log.hrl").
--include_lib("rtmp/include/rtmp.hrl").
+-include_lib("../../../rtmp/include/rtmp.hrl").
 -export([decode/2, encode/2]).
 
 -export([connect/2]).
@@ -68,7 +68,7 @@ encode(Session, Secret) when is_list(Session) ->
   <<Json64/binary, "--", Sign/binary>>.
 
 session_sign(Session, Secret) ->
-  ems:binary_to_hexbin(crypto:sha_mac(Secret, Session)).
+  ems:binary_to_hexbin(crypto:hmac(aes_cbc, Secret, Session)).
 
 
 verify_signature(_, _, undefined) ->

@@ -24,8 +24,8 @@
 -module(rtmp_session).
 -author('Max Lapshin <max@maxidoors.ru>').
 -include("log.hrl").
--include_lib("erlmedia/include/video_frame.hrl").
--include_lib("erlmedia/include/media_info.hrl").
+-include_lib("../../erlmedia/include/video_frame.hrl").
+-include_lib("../../erlmedia/include/media_info.hrl").
 -include("../include/rtmp.hrl").
 -include("rtmp_session.hrl").
 
@@ -130,7 +130,7 @@ set_socket(Pid, Socket) when is_pid(Pid) ->
 %% @private
 %%-------------------------------------------------------------------------
 init([Callback]) ->
-  random:seed(now()),
+  rand:seed(erlang:unique_integer()),
   {ok, Session} = Callback:init(#rtmp_session{module = Callback}),
   {ok, Session}.
 
@@ -386,7 +386,7 @@ call_function(#rtmp_session{} = State, #rtmp_funcall{command = connect, args = [
     _ -> 0
   end,
 
-  SessionId = timer:now_diff(erlang:now(),{0,0,0}),
+  SessionId = timer:now_diff(erlang:unique_integer(),{0,0,0}),
 
 	NewState1 =	State#rtmp_session{player_info = PlayerInfo, path = Path, amf_ver = AMFVersion, session_id = SessionId},
 

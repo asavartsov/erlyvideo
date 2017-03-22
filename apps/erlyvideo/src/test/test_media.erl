@@ -26,13 +26,12 @@
 
 -behaviour(ems_media).
 
--include_lib("erlmedia/include/video_frame.hrl").
--include_lib("erlmedia/include/media_info.hrl").
+-include_lib("../../../erlmedia/include/video_frame.hrl").
+-include_lib("../../../erlmedia/include/media_info.hrl").
 -include("../media/ems_media.hrl").
 
 -export([init/2, handle_frame/2, handle_control/2, handle_info/2]).
 -export([seek/3]).
-
 
 
 seek(_Media, before, Timestamp) ->

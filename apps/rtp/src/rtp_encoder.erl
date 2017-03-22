@@ -25,11 +25,11 @@
 -author('Max Lapshin <max@maxidoors.ru>').
 -author('Maxim Treskin <zerthud@gmail.com>').
 
--include_lib("erlmedia/include/h264.hrl").
--include_lib("erlmedia/include/video_frame.hrl").
--include_lib("erlmedia/include/media_info.hrl").
--include_lib("erlmedia/include/sdp.hrl").
--include("rtp.hrl").
+-include_lib("../../erlmedia/include/h264.hrl").
+-include_lib("../../erlmedia/include/video_frame.hrl").
+-include_lib("../../erlmedia/include/media_info.hrl").
+-include_lib("../../erlmedia/include/sdp.hrl").
+-include("../../rtp/include/rtp.hrl").
 -include("log.hrl").
 
 
@@ -76,7 +76,7 @@ encode(#video_frame{dts = DTS, body = Data} = _F, #rtp_channel{} = RTP) ->
 encode_rtcp(#rtp_channel{stream_id = StreamId, packet_count = PacketCount, octet_count = OctetCount, timecode = Timecode}, sender_report, _) ->
   Count = 0,
   Length = 6, % StreamId, 2*NTP, Timecode, Packet, Octet words
-  {Mega, Sec, Micro} = erlang:now(),
+  {Mega, Sec, Micro} = erlang:timestamp(),
   MSW = (Mega*1000000 + Sec + ?YEARS_70) band 16#FFFFFFFF,
   LSW = Micro * 1000,
   % NTP = MSW + Micro / 1000000,
@@ -170,5 +170,5 @@ inc_bytes(S, V) ->
   (S+V) band 16#FFFFFFFF.
 
 make_ssrc() ->
-  random:seed(now()),
-  random:uniform(16#FFFFFFFF).
+  rand:seed(erlang:unique_integer()),
+  rand:uniform(16#FFFFFFFF).

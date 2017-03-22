@@ -24,7 +24,7 @@
 -module(rtmp_application_test).
 -author('Max Lapshin <max@maxidoors.ru>').
 -include("../log.hrl").
--include_lib("rtmp/include/rtmp.hrl").
+-include_lib("../../../rtmp/include/rtmp.hrl").
 
 -export([amf3_typed_response/2]).
 

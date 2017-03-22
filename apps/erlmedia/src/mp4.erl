@@ -587,7 +587,7 @@ mvhd(<<0:32, CTime:32, MTime:32, TimeScale:32, Duration:32, Rate:16, _RateDelim:
         
   _Meta = [{ctime,CTime},{mtime,MTime},{timescale,TimeScale},{duration,Duration},{rate,Rate},
           {volume,Volume},{matrix,Matrix},{next_track,NextTrackId}],
-  % ?D(Meta),
+  ?D(_Meta),
   Media#mp4_media{timescale = TimeScale, duration = Duration*1000 div TimeScale}.
 
 udta(UDTA, Media) ->
@@ -672,7 +672,7 @@ tkhd(<<0, Flags:24, CTime:32, MTime:32, TrackID:32, _Reserved1:32,
        Volume, _VolDelim, _Reserved3:16, Matrix:36/binary, Width:16, _WidthDelim:16, Height:16, _HeightDelim:16>>, Mp4Track) ->
   _Meta = [{flags,Flags},{ctime,CTime},{mtime,MTime},{track_id,TrackID},{duration,Duration},{layer,Layer},
          {volume,Volume},{matrix,Matrix},{width,Width},{height,Height}],
-  % ?D(Meta),
+  ?D(_Meta),
   Mp4Track#mp4_track{track_id = TrackID, duration = Duration}.
 
 % Media box
@@ -806,10 +806,8 @@ mp4v(_T, Mp4Track) ->
 avc1(<<_Reserved:6/binary, _RefIndex:16, _Unknown1:16/binary, Width:16, Height:16,
       HorizRes:16, _:16, VertRes:16, _:16, _FrameCount:16, _CompressorName:32/binary,
       Depth:16, _Predefined:16, _Unknown:4/binary, Atom/binary>>, Mp4Track) ->
-  _Meta = [{width,Width},{height,Height},
-          {horiz_res, HorizRes},{vert_res, VertRes},
-          {depth,Depth}],
-  % ?D({"Video size:", Meta}),
+  Meta =  [{width,Width},{height,Height}, {horiz_res, HorizRes},{vert_res, VertRes}, {depth,Depth}],
+  ?D({"Video size:", Meta}),
   parse_atom(Atom, Mp4Track#mp4_track{codec = h264, width = Width, height = Height}).
 
 s263(<<_Reserved:6/binary, _RefIndex:16, _Unknown1:16/binary, Width:16, Height:16,

@@ -23,7 +23,7 @@
 -module(ems_media_clients).
 -author('Max Lapshin <max@maxidoors.ru>').
 
--include_lib("erlmedia/include/video_frame.hrl").
+-include_lib("../../../erlmedia/include/video_frame.hrl").
 -include("../log.hrl").
 -include("ems_media_client.hrl").
 -include_lib("eunit/include/eunit.hrl").

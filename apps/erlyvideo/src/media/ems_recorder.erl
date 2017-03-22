@@ -23,7 +23,7 @@
 -module(ems_recorder).
 -author('Max Lapshin <max@maxidoors.ru>').
 -behaviour(gen_server).
--include_lib("erlmedia/include/video_frame.hrl").
+-include_lib("../../../erlmedia/include/video_frame.hrl").
 -include("../log.hrl").
 
 

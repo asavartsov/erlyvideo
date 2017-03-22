@@ -23,7 +23,7 @@
 -module(apps_sip).
 -author('Max Lapshin <max@maxidoors.ru>').
 
--include_lib("rtmp/include/rtmp.hrl").
+-include_lib("../../../rtmp/include/rtmp.hrl").
 -include("../log.hrl").
 
 %% RTMP callbacks

@@ -23,8 +23,8 @@
 %%%---------------------------------------------------------------------------------------
 -module(ems_test_helper).
 -author('Max Lapshin <max@maxidoors.ru>').
--include_lib("erlmedia/include/video_frame.hrl").
--include_lib("erlmedia/include/media_info.hrl").
+-include_lib("../../../erlmedia/include/video_frame.hrl").
+-include_lib("../../../erlmedia/include/media_info.hrl").
 -include_lib("../../src/log.hrl").
 
 -compile(export_all).

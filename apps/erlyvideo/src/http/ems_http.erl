@@ -46,7 +46,7 @@ host(Req) ->
 
 % callback on request received
 handle_http(Req) ->
-  random:seed(now()),
+  rand:seed(erlang:monotonic_time()),
   Host = host(Req),
   Method = Req:get(method),
   Path = [Segment || Segment <- Req:resource([urldecode]), Segment =/= ".."],

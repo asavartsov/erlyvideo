@@ -10,7 +10,7 @@
 %%%---------------------------------------------------------------------------------------
 -module(ems_http_notify).
 -author('Max Lapshin <max@maxidoors.ru>').
--include_lib("erlmedia/include/video_frame.hrl").
+-include_lib("../../../erlmedia/include/video_frame.hrl").
 -include("../log.hrl").
 
 -export([handle_info/2]).

@@ -24,8 +24,8 @@
 -module(apps_recording).
 -author('Max Lapshin <max@maxidoors.ru>').
 -include("../log.hrl").
--include_lib("rtmp/include/rtmp.hrl").
--include_lib("erlmedia/include/video_frame.hrl").
+-include_lib("../../../rtmp/include/rtmp.hrl").
+-include_lib("../../../erlmedia/include/video_frame.hrl").
 
 -export([publish/2]).
 -export(['FCPublish'/2, 'FCUnpublish'/2]).

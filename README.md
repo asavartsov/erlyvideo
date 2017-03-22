@@ -1,12 +1,23 @@
-Erlyvideo
+Erlyvideo and Background Information
 =========
 
-Erlyvideo is a flash streaming server, written in erlang: http://erlyvideo.org/
-Source code is available at http://github.com/erlyvideo/erlyvideo
+This was originally an open source project but it went closed source and can be licensed here: [Flussonic](https://flussonic.com). Since I am working on a scientific project that will utilize video streaming, I wanted an open source version. Hence I started hacking around with this for video streaming as well as exploring other alternatives. Otherwise, for others,  the simplest thing is simply to pay for a Flussonic license. I have no idea what the relationship of this code base is to the current commercial version.  
 
-All documentation is on http://erlyvideo.org/ and in doc/html/ 
+I left some of the verbage in this README file alone for now, although it may not be fully relevant. This code base was cloned from another remnant of the open source version but, as is, it did not compile due to bit-rot. For now I am hacking around on this to get it to compile and work as part of the different alternatives I am exploring for my project.
 
-Licensing
+Gradually I am able to compile more and more it. Once everything compiles I will see how well it actually works.
+
+Changes
+========
+*Notes (as of 3/20/2017):* The application now compiles after a number of small changes to deal with "bit rot." It compiles on Unbuntu 14.04 with erlang 19.0. The next step is to get it working! 
+
+The main issues were the following:
+1. include files not pointing to the right directories
+2. obsolete or depreciated functions
+3. parameterized modules that are no longer supported in erlang.
+4. there also were some issues with compiling the nif's that required changing the rebar.config files
+
+Licensing (still relevant)
 =========
 
 Erlyvideo is distributed under the GNU General Public License version 3 and is also available under alternative licenses negotiated directly with Erlyvideo author Max Lapshin <info@erlyvideo.org>. The GPL (version 3) is included in this source tree in the file COPYING.
@@ -30,7 +41,7 @@ To run tests don't forget to add test vhost:
   ]}
 ```
 
-How to install plugins
+How to install plugins (probably no longer relevant)
 =========
 
 First you may install your own small plugin files. If you are building erlyvideo from source, you may put them into

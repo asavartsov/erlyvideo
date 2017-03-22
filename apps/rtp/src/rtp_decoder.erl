@@ -24,11 +24,12 @@
 -module(rtp_decoder).
 -author('Max Lapshin <max@maxidoors.ru>').
 
--include_lib("erlmedia/include/h264.hrl").
--include_lib("erlmedia/include/video_frame.hrl").
--include_lib("erlmedia/include/media_info.hrl").
--include_lib("erlmedia/include/sdp.hrl").
--include("rtp.hrl").
+
+-include_lib("../../../apps/erlmedia/include/h264.hrl").
+-include_lib("../../../apps/erlmedia/include/video_frame.hrl").
+-include_lib("../../../apps/erlmedia/include/media_info.hrl").
+-include_lib("../../../apps/erlmedia/include/sdp.hrl").
+-include("../include/rtp.hrl").
 -include("log.hrl").
 -include_lib("eunit/include/eunit.hrl").
 

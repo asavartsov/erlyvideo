@@ -23,8 +23,8 @@
 -module(ems_media_utils).
 -author('Max Lapshin <max@maxidoors.ru>').
 
--include_lib("erlmedia/include/video_frame.hrl").
--include_lib("erlmedia/include/media_info.hrl").
+-include_lib("../../../erlmedia/include/video_frame.hrl").
+-include_lib("../../../erlmedia/include/media_info.hrl").
 -include("ems_media.hrl").
 -include("ems_media_client.hrl").
 -include("../log.hrl").
@@ -69,7 +69,7 @@ failure_movie(#ems_media{source = Source} = Media, Name) ->
   handle_lost_source(Media#ems_media{ts_delta = undefined, failure_source = FailureSource}).
 
 handle_lost_source(#ems_media{module = M, source = Source, source_timeout = SourceTimeout} = Media) ->  
-  case M:handle_control({source_lost, Source}, Media#ems_media{source = undefined, source_lost_at = erlang:now()}) of
+  case M:handle_control({source_lost, Source}, Media#ems_media{source = undefined, source_lost_at = erlang:timestamp()}) of
     {stop, Reason, Media1} ->
       ?D({"ems_media is stopping due to source_lost", M, Source, Reason}),
       {stop, Reason, Media1};

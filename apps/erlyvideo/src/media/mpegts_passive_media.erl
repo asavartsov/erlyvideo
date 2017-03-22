@@ -23,7 +23,7 @@
 -module(mpegts_passive_media).
 -author('Max Lapshin <max@maxidoors.ru>').
 -behaviour(ems_media).
--include_lib("erlmedia/include/video_frame.hrl").
+-include_lib("../../../erlmedia/include/video_frame.hrl").
 -include("ems_media.hrl").
 -include("../log.hrl").
 

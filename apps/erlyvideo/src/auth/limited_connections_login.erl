@@ -20,6 +20,9 @@
 %%% along with erlyvideo.  If not, see <http://www.gnu.org/licenses/>.
 %%%
 %%%---------------------------------------------------------------------------------------
+
+-include_lib("../../pmod_transform/include/pmod.hrl").
+
 -module(limited_connections_login, [Timer]).
 -author('Max Lapshin <max@maxidoors.ru>').
 -include_lib("../log.hrl").

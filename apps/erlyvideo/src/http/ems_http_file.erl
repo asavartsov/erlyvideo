@@ -21,6 +21,9 @@
 %%% along with erlyvideo.  If not, see <http://www.gnu.org/licenses/>.
 %%%
 %%%---------------------------------------------------------------------------------------
+
+-include_lib("../../pmod_transform/include/pmod.hrl").
+
 -module(ems_http_file, [DocRoot]).
 -author('Max Lapshin <max@maxidoors.ru>').
 -include("../ems.hrl").

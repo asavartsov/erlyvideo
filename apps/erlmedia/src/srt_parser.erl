@@ -27,6 +27,7 @@
 
 %% External API
 -export([parse/1]).
+-compile({no_auto_import, [binary_to_integer/1]}).
 
 -define(NewLine, "\r\n|\r|\n").
 -define(EmptyLine, "\r\n\s*\r+\n+|\r\s*\r+|\n\s*\n+").
@@ -76,10 +77,10 @@ get_times(TimeBin) ->
 
 parse_time(Time) ->
   [HBin|[MBin|[SBin|[MSBin|_]]]] = re:split(Time, ":|,"),
-  H = binary_to_integer(HBin),
-  M = binary_to_integer(MBin),
-  S = binary_to_integer(SBin),
-  MS = binary_to_integer(MSBin),
+  H = srt_parser:binary_to_integer(HBin),
+  M = srt_parser:binary_to_integer(MBin),
+  S = srt_parser:binary_to_integer(SBin),
+  MS = srt_parser:binary_to_integer(MSBin),
   H * 3600000 + M * 60000 + S * 1000 + MS.
 
 binary_to_integer(Bin) ->
